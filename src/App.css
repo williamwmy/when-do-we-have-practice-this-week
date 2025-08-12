@@ -1,0 +1,285 @@
+/* Bislett Volleyball Theme */
+:root {
+  --primary-blue: #1e40af;
+  --light-blue: #3b82f6;
+  --accent-orange: #f97316;
+  --white: #ffffff;
+  --light-gray: #f8fafc;
+  --text-dark: #1e293b;
+  --border: #e2e8f0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--light-blue) 0%, var(--primary-blue) 100%);
+  min-height: 100vh;
+  color: var(--text-dark);
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: var(--white);
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.main-title {
+  color: var(--primary-blue);
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  width: 100%;
+  line-height: 1.2;
+  animation: growIn 1.5s ease-out;
+}
+
+.week-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  animation: growIn 1.5s ease-out;
+}
+
+.week-number {
+  color: var(--accent-orange);
+  font-size: 3rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.current-week-indicator {
+  font-size: 1rem;
+  color: var(--primary-blue);
+  font-weight: 400;
+}
+
+.week-nav-btn {
+  background: transparent;
+  color: var(--light-blue);
+  border: none;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+}
+
+.week-nav-btn:hover:not(:disabled) {
+  background: var(--light-gray);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.week-nav-btn:disabled {
+  color: #d1d5db;
+  cursor: not-allowed;
+  opacity: 0.3;
+  transform: none;
+}
+
+@keyframes growIn {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.app-footer {
+  background: var(--primary-blue);
+  color: var(--white);
+  text-align: center;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.version {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* Training Schedule Styles */
+.training-schedule {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.training-schedule h2 {
+  color: var(--primary-blue);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.sessions {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.session-card {
+  background: var(--light-gray);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.session-card::before {
+  content: '🏐';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 3rem;
+  opacity: 0.1;
+  transform: rotate(-15deg);
+}
+
+.session-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(30, 64, 175, 0.2);
+  border-color: var(--light-blue);
+}
+
+.session-card h3 {
+  color: var(--primary-blue);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.session-card .date {
+  color: var(--accent-orange);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.session-card .time {
+  color: var(--text-dark);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.no-training {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-dark);
+}
+
+.no-training p {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.holiday-info {
+  color: var(--accent-orange);
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+.info {
+  background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
+  color: var(--white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.info h3 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.info ul {
+  list-style: none;
+}
+
+.info li {
+  padding: 0.5rem 0;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2.5rem;
+  }
+  
+  .week-number {
+    font-size: 2rem;
+  }
+  
+  .week-nav-btn {
+    width: 25px;
+    height: 25px;
+    font-size: 0.7rem;
+  }
+  
+  .week-navigation {
+    gap: 0.5rem;
+  }
+  
+  .app-header {
+    padding: 2rem 1rem;
+  }
+  
+  .app-main {
+    padding: 1rem;
+  }
+  
+  .training-schedule {
+    padding: 1.5rem;
+  }
+  
+  .no-training p {
+    font-size: 2rem;
+  }
+  
+  .app-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
