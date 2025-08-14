@@ -1,0 +1,51 @@
+{
+  "season": {
+    "start": "2025-08-18",
+    "end": "2026-05-31"
+  },
+  "holidayPeriods": {
+    "christmas": {
+      "start": "12-24",
+      "end": "01-07"
+    }
+  },
+  "specialDays": [
+    "ascensionDay"
+  ],
+  "trainingSchedule": {
+    "tuesday": {
+      "time": "18:00 - 19:30",
+      "frequency": "odd_weeks_only",
+      "active": true
+    },
+    "thursday": {
+      "time": "19:30 - 21:00", 
+      "frequency": "every_week",
+      "active": true
+    }
+  },
+  "specialWeeks": {
+    "35": [
+      {
+        "day": "Monday",
+        "time": "18:30 - 20:00",
+        "active": true
+      },
+      {
+        "day": "Tuesday", 
+        "time": "20:30 - 22:00",
+        "active": true
+      }
+    ],
+    "36": [
+      {
+        "day": "Tuesday",
+        "time": "20:30 - 22:00", 
+        "active": true
+      }
+    ]
+  },
+  "club": {
+    "name": "Bislett Volleyball Club"
+  }
+}

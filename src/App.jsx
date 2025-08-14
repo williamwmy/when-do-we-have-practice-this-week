@@ -84,7 +84,7 @@ function App() {
       
       <footer className="app-footer">
         <p>Bislett Volleyball Club</p>
-        <p className="version">v1.0.0</p>
+        <p className="version">v1.1.0</p>
       </footer>
     </div>
   )

@@ -242,6 +242,122 @@ body {
   font-size: 1rem;
 }
 
+/* Christmas Theme Styles */
+.christmas-theme {
+  background: linear-gradient(135deg, #dc2626 0%, #059669 50%, #dc2626 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.christmas-snow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.snowflake {
+  position: absolute;
+  color: white;
+  font-size: 1rem;
+  animation: fall linear infinite;
+  opacity: 0.8;
+}
+
+.snowflake-1 { left: 10%; animation-duration: 3s; animation-delay: 0s; }
+.snowflake-2 { left: 20%; animation-duration: 4s; animation-delay: 0.5s; }
+.snowflake-3 { left: 30%; animation-duration: 3.5s; animation-delay: 1s; }
+.snowflake-4 { left: 40%; animation-duration: 5s; animation-delay: 1.5s; }
+.snowflake-5 { left: 50%; animation-duration: 4.5s; animation-delay: 2s; }
+.snowflake-1:nth-child(6) { left: 60%; animation-duration: 3s; animation-delay: 2.5s; }
+.snowflake-2:nth-child(7) { left: 70%; animation-duration: 4s; animation-delay: 3s; }
+.snowflake-3:nth-child(8) { left: 80%; animation-duration: 3.5s; animation-delay: 3.5s; }
+.snowflake-4:nth-child(9) { left: 90%; animation-duration: 5s; animation-delay: 4s; }
+.snowflake-5:nth-child(10) { left: 15%; animation-duration: 4.5s; animation-delay: 4.5s; }
+.snowflake-1:nth-child(11) { left: 25%; animation-duration: 3s; animation-delay: 5s; }
+.snowflake-2:nth-child(12) { left: 35%; animation-duration: 4s; animation-delay: 5.5s; }
+.snowflake-3:nth-child(13) { left: 45%; animation-duration: 3.5s; animation-delay: 6s; }
+.snowflake-4:nth-child(14) { left: 55%; animation-duration: 5s; animation-delay: 6.5s; }
+.snowflake-5:nth-child(15) { left: 65%; animation-duration: 4.5s; animation-delay: 7s; }
+.snowflake-1:nth-child(16) { left: 75%; animation-duration: 3s; animation-delay: 7.5s; }
+.snowflake-2:nth-child(17) { left: 85%; animation-duration: 4s; animation-delay: 8s; }
+.snowflake-3:nth-child(18) { left: 95%; animation-duration: 3.5s; animation-delay: 8.5s; }
+.snowflake-4:nth-child(19) { left: 5%; animation-duration: 5s; animation-delay: 9s; }
+.snowflake-5:nth-child(20) { left: 95%; animation-duration: 4.5s; animation-delay: 9.5s; }
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.christmas-no-training {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 1rem;
+  color: var(--text-dark);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.christmas-message {
+  font-size: 3rem;
+  color: #dc2626;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.christmas-submessage {
+  font-size: 1.5rem;
+  color: #059669;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.christmas-emoji {
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+/* Special Session Styles */
+.special-session {
+  background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 100%);
+  border: 2px solid var(--accent-orange);
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+}
+
+.special-session:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+}
+
+.special-session h3 {
+  color: var(--primary-blue);
+}
+
+.special-note {
+  color: var(--primary-blue);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  display: inline-block;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .main-title {

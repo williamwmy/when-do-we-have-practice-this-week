@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import scheduleConfig from './trainingSchedule.json'
 
 const TrainingSchedule = ({ currentWeek }) => {
   const [trainingSessions, setTrainingSessions] = useState([])
@@ -29,6 +30,10 @@ const TrainingSchedule = ({ currentWeek }) => {
     return date >= christmas && date <= newYear
   }
 
+  const isChristmasWeek = (weekNumber) => {
+    return weekNumber === 52 || weekNumber === 1
+  }
+
   const isAscensionDay = (date) => {
     const year = date.getFullYear()
     const easter = getEasterDate(year)
@@ -37,8 +42,8 @@ const TrainingSchedule = ({ currentWeek }) => {
   }
 
   const isInSeason = (date) => {
-    const seasonStart = new Date(2025, 7, 18) // August 18, 2025 (month is 0-indexed)
-    const seasonEnd = new Date(2026, 4, 31) // May 31, 2026
+    const seasonStart = new Date(scheduleConfig.season.start)
+    const seasonEnd = new Date(scheduleConfig.season.end)
     return date >= seasonStart && date <= seasonEnd
   }
 
@@ -60,6 +65,37 @@ const TrainingSchedule = ({ currentWeek }) => {
     const weekNumber = getWeekNumber(date)
     const isOddWeek = weekNumber % 2 === 1
 
+    // Check for special weeks first
+    if (scheduleConfig.specialWeeks && scheduleConfig.specialWeeks[weekNumber.toString()]) {
+      const specialSessions = scheduleConfig.specialWeeks[weekNumber.toString()]
+      const startOfWeek = new Date(date)
+      startOfWeek.setDate(date.getDate() - date.getDay() + 1) // Monday
+      
+      specialSessions.forEach(session => {
+        let sessionDate = new Date(startOfWeek)
+        const dayOffset = {
+          'Monday': 0,
+          'Tuesday': 1,
+          'Wednesday': 2,
+          'Thursday': 3,
+          'Friday': 4,
+          'Saturday': 5,
+          'Sunday': 6
+        }
+        sessionDate.setDate(startOfWeek.getDate() + dayOffset[session.day])
+        
+        sessions.push({
+          day: session.day,
+          date: sessionDate.toLocaleDateString('en-US'),
+          time: session.time,
+          active: session.active,
+          isSpecial: true
+        })
+      })
+      return sessions
+    }
+
+    // Regular schedule for non-special weeks
     // Find Tuesday of this week
     const startOfWeek = new Date(date)
     startOfWeek.setDate(date.getDate() - date.getDay() + 1) // Monday
@@ -79,8 +115,8 @@ const TrainingSchedule = ({ currentWeek }) => {
       sessions.push({
         day: 'Tuesday',
         date: tuesday.toLocaleDateString('en-US'),
-        time: '18:00 - 19:30',
-        active: true
+        time: scheduleConfig.trainingSchedule.tuesday.time,
+        active: scheduleConfig.trainingSchedule.tuesday.active
       })
     }
 
@@ -89,8 +125,8 @@ const TrainingSchedule = ({ currentWeek }) => {
       sessions.push({
         day: 'Thursday',
         date: thursday.toLocaleDateString('en-US'),
-        time: '19:30 - 21:00',
-        active: true
+        time: scheduleConfig.trainingSchedule.thursday.time,
+        active: scheduleConfig.trainingSchedule.thursday.active
       })
     }
 
@@ -105,24 +141,42 @@ const TrainingSchedule = ({ currentWeek }) => {
   }, [currentWeek])
 
   return (
-    <div className="training-schedule">
+    <div className={`training-schedule ${isChristmasWeek(currentWeek) ? 'christmas-theme' : ''}`}>
+      {isChristmasWeek(currentWeek) && (
+        <div className="christmas-snow">
+          {[...Array(20)].map((_, i) => (
+            <div key={i} className={`snowflake snowflake-${i % 5 + 1}`}>❄</div>
+          ))}
+        </div>
+      )}
       {trainingSessions.length > 0 ? (
         <div className="sessions">
           {trainingSessions.map((session, index) => (
-            <div key={index} className="session-card">
+            <div key={index} className={`session-card ${session.isSpecial ? 'special-session' : ''}`}>
               <h3>{session.day}</h3>
               <p className="date">{session.date}</p>
               <p className="time">{session.time}</p>
+              {session.isSpecial && <p className="special-note">⚠️ Special training - different from usual schedule</p>}
             </div>
           ))}
         </div>
       ) : (
-        <div className="no-training">
-          <p>No practice this week</p>
-          <p className="holiday-info">
-            {isChristmasHolidays(new Date()) && "Christmas holidays"}
-            {!isInSeason(new Date()) && "Training season: August 18, 2025 - May 31, 2026"}
-          </p>
+        <div className={`no-training ${isChristmasWeek(currentWeek) ? 'christmas-no-training' : ''}`}>
+          {isChristmasWeek(currentWeek) ? (
+            <>
+              <p className="christmas-message">🎄 Merry Christmas! 🎅</p>
+              <p className="christmas-submessage">No practice during the holidays</p>
+              <p className="christmas-emoji">🏐 ❄️ 🎁</p>
+            </>
+          ) : (
+            <>
+              <p>No practice this week</p>
+              <p className="holiday-info">
+                {isChristmasHolidays(new Date()) && "Christmas holidays"}
+                {!isInSeason(new Date()) && `Training season: ${scheduleConfig.season.start} - ${scheduleConfig.season.end}`}
+              </p>
+            </>
+          )}
         </div>
       )}
     </div>
